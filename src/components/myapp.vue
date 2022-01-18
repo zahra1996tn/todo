@@ -1,12 +1,12 @@
-<template>
-    <div>
+<template>        
+<h1 class="title"> لیست کارهای روزانه </h1>
+    <div class="box-todo">
         <table>
             <tbody>
                 <tr v-for='(item,index) in items' :key="item">
-                    <td> {{index+1}} </td>
-                    <td> {{item}}</td>
-                    <td> <i @click="removetodo(index)"> حذف </i> </td>
-                   
+                    <counter :index="index"/>
+                    <list-item :item="item" />
+                    <deletebtn @click="removetodo(index)" />
                 </tr>
             </tbody>
         </table>
@@ -14,7 +14,11 @@
 </template>
 
 <script>
+import Counter from './counter.vue'
+import deletebtn from './deletebtn.vue'
+import ListItem from './list-item.vue'
 export default {
+  components: { deletebtn, Counter, ListItem },
     name:'myapp',
     props:{
         items:Array,
@@ -34,20 +38,23 @@ export default {
         font-size: normal;
         src: url("../font/IRAN Sans Regular (mmrostami.blog.ir).ttf");
     }
+    
+    .title{
+        margin-top: -170px;
+    }
     body{
         background-color: #f88f2d;
         
     }
     table{
         display: block !important;
-        margin-top: 50px;
+        margin-top: 156px;
     }
     tbody{
         display: block;
         margin: 0 auto !important;
     }
     tr td{
-        /* list-style-type: none; */
         position: relative;
         z-index: 555;
         margin: 10px auto !important;
@@ -84,9 +91,6 @@ export default {
         border-radius: 5px;
         backdrop-filter: blur( 8px );
         -webkit-backdrop-filter: blur( 4px );
-
-        /* box-shadow:  33px 33px 66px #cecece,
-             -33px -33px 66px #f2f2f2;  */
     }
     .div-input{
     width: 400px;
@@ -98,13 +102,8 @@ export default {
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 8px );
     -webkit-backdrop-filter: blur( 4px );
-    /* border-radius: 10px; */
     border: 1px solid rgba( 255, 255, 255, 0.18 );
-    /* shadow */
      border-radius: 34px;
-    /*background: #f0f0f0; */
-    /* box-shadow: inset 12px 12px 18px #c7c7c7,
-            inset -12px -12px 18px #f9f9f9; */
         }
 
 </style>
